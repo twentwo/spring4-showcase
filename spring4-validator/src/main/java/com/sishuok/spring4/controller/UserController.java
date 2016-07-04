@@ -84,6 +84,13 @@ public class UserController {
         return "success";
     }
 
+    //方法参数/返回值验证
+    @RequestMapping("/get0/{uuid}")
+    public String get0(@PathVariable(value = "uuid") Integer uuid) {
+        userService.get0(uuid);
+        return "success";
+    }
+
     @RequestMapping("/ajax")
     @ResponseBody
     public Object ajaxError(@Valid User user, BindingResult result) {
