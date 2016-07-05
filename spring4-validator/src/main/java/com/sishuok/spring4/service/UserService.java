@@ -19,12 +19,8 @@ import javax.validation.constraints.NotNull;
 @Service
 public class UserService {
 
-    @CrossParameterScriptAssert(script = "args[0] == args[1]", lang = "javascript", alias = "args", message = "{password.confirmation.error}")
-    public void changePassword(String password, String confirmation) {
-
-    }
-
-    public @NotNull UserModel get0(@NotNull @Min(value = 1, message = "{can.not.less}") Integer uuid) { //②声明前置条件/后置条件
+    @NotNull
+    public UserModel get0(@NotNull @Min(value = 1, message = "{can.not.less}") Integer uuid) { //②声明前置条件/后置条件
         //获取 User Model
         UserModel user = new UserModel(); //此处应该从数据库获取
         if(uuid > 100) {//方便后置添加的判断（此处假设传入的uuid>100 则返回null）
@@ -32,4 +28,10 @@ public class UserService {
         }
         return user;
     }
+
+    @CrossParameterScriptAssert(script = "args[0] == args[1]", lang = "javascript", alias = "args", message = "{password.confirmation.error}")
+    public void changePassword(String password, String confirmation) {
+
+    }
+
 }

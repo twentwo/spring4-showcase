@@ -39,6 +39,7 @@
         <property name="cacheSeconds" value="60"/>
     </bean>
 
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
