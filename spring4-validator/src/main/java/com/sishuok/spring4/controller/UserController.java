@@ -84,7 +84,15 @@ public class UserController {
         return "success";
     }
 
-    //方法参数/返回值验证
+
+    /**
+     * 方法参数/返回值验证
+     *
+     * 方法或返回值验证失败抛出 javax.validation.ConstraintViolationException: null
+     * 需要在ExceptionResolver中处理，获得失败信息 TODO
+     * @param uuid
+     * @return
+     */
     @RequestMapping("/get0/{uuid}")
     public String get0(@PathVariable(value = "uuid") Integer uuid) {
         userService.get0(uuid);
