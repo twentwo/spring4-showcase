@@ -1,6 +1,7 @@
 package com.sishuok.spring4.validator;
 
 import com.sishuok.spring4.entity.User;
+import com.sishuok.spring4.entity.User5;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
@@ -11,14 +12,14 @@ import javax.validation.ConstraintValidatorContext;
  * <p>Date: 13-12-15
  * <p>Version: 1.0
  */
-public class CheckPasswordValidator implements ConstraintValidator<CheckPassword, User> {
+public class CheckPasswordValidator implements ConstraintValidator<CheckPassword, User5> {
 
     @Override
     public void initialize(CheckPassword constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(User user, ConstraintValidatorContext context) {
+    public boolean isValid(User5 user, ConstraintValidatorContext context) {
         if(user == null) {
             return true;
         }

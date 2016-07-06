@@ -536,7 +536,9 @@ public class ConstraintDescriptorImpl<T extends Annotation> implements Constrain
                 throw log.getUnableToReadAnnotationAttributesException( annotation.getClass(), e );
             }
         }
-        return Collections.unmodifiableMap( parameters );
+//        return Collections.unmodifiableMap( parameters );
+        /* 直接返回 允许这个数据可以修改 */
+        return parameters;
     }
 
     private Object getMethodValue(Annotation annotation, Method m) {

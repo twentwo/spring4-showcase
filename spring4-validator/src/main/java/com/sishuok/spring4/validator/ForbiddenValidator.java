@@ -13,7 +13,7 @@ import javax.validation.ConstraintValidatorContext;
  * <p>Date: 13-12-15
  * <p>Version: 1.0
  */
-public class ForbiddenValidator implements ConstraintValidator<CheckPassword, String> {
+public class ForbiddenValidator implements ConstraintValidator<Forbidden, String> {
 
     @Autowired
     private ApplicationContext ctx;
@@ -21,7 +21,7 @@ public class ForbiddenValidator implements ConstraintValidator<CheckPassword, St
     private String[] forbiddenWords = {"admin"};
 
     @Override
-    public void initialize(CheckPassword constraintAnnotation) {
+    public void initialize(Forbidden constraintAnnotation) {
         //初始化，得到注解数据
     }
 

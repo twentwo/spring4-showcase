@@ -1,6 +1,7 @@
 package com.sishuok.spring4.service;
 
 import com.sishuok.spring4.entity.UserModel;
+import com.sishuok.spring4.validator.CrossParameter;
 import com.sishuok.spring4.validator.CrossParameterScriptAssert;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +31,11 @@ public class UserService {
 
     @CrossParameterScriptAssert(script = "args[0] == args[1]", lang = "javascript", alias = "args", message = "{password.confirmation.error}")
     public void changePassword(String password, String confirmation) {
+
+    }
+
+    @CrossParameter
+    public void changePassword0(String password, String confirmation) {
 
     }
 

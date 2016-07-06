@@ -24,7 +24,7 @@ public class CrossParameterValidator implements ConstraintValidator<CrossParamet
             throw new IllegalArgumentException("must have two args");
         }
         if(value[0] == null || value[1] == null) {
-            return true;
+            return false;
         }
         if(value[0].equals(value[1])) {
             return true;

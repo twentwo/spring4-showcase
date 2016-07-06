@@ -20,6 +20,8 @@ import javax.validation.Valid;
  * <p>User: Zhang Kaitao
  * <p>Date: 13-12-13
  * <p>Version: 1.0
+ *
+ * @see <url>http://jinnianshilongnian.iteye.com/blog/1990081</url>
  */
 @Controller
 public class UserController {
@@ -95,7 +97,97 @@ public class UserController {
      */
     @RequestMapping("/get0/{uuid}")
     public String get0(@PathVariable(value = "uuid") Integer uuid) {
-        userService.get0(uuid);
+        try {
+            userService.get0(uuid);
+        } catch (ConstraintViolationException e) {
+            for(ConstraintViolation violation : e.getConstraintViolations()) {
+                System.out.println(String.format("==================%s",
+                        violation.getMessage()));
+            }
+            return "error";
+        }
+        return "success";
+    }
+
+    //自定义验证规则
+    @RequestMapping("/save5")
+    public String save5(@ModelAttribute("user") @Valid User4 user, BindingResult result) {
+        if(result.hasErrors()) {
+            return "error";
+        }
+        return "success";
+    }
+
+    //类级别验证器
+    @RequestMapping("/save6")
+    public String save6(@ModelAttribute("user") @Valid User5 user, BindingResult result) {
+        if(result.hasErrors()) {
+            return "error";
+        }
+        return "success";
+    }
+
+    //通过脚本验证
+    @RequestMapping("/save7")
+    public String save7(@ModelAttribute("user") @Valid User6 user, BindingResult result) {
+        if(result.hasErrors()) {
+            return "error";
+        }
+        return "success";
+    }
+
+    @Autowired
+    private UserService userService;
+
+    //cross-parameter，跨参数验证
+    @RequestMapping("/changePassword")
+    public String changePassword0(
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "confirmation", required = false) String confirmation, Model model) {
+        try {
+            userService.changePassword0(password, confirmation);
+        } catch (ConstraintViolationException e) {
+            for(ConstraintViolation violation : e.getConstraintViolations()) {
+                System.out.println(String.format("==================%s",
+                        violation.getMessage()));
+            }
+            return "error";
+        }
+        return "success";
+    }
+
+    //混合类级别验证器和跨参数验证器 跨参数验证
+    @RequestMapping("/changePassword0")
+    public String changePassword(
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "confirmation", required = false) String confirmation, Model model) {
+        try {
+            userService.changePassword(password, confirmation);
+        } catch (ConstraintViolationException e) {
+            for(ConstraintViolation violation : e.getConstraintViolations()) {
+                System.out.println(String.format("==================%s",
+                        violation.getMessage()));
+            }
+            return "error";
+        }
+        return "success";
+    }
+
+    //混合类级别验证器和跨参数验证器 类级别使用
+    @RequestMapping("/changePassword1")
+    public String changePassword(@ModelAttribute("user") @Valid User user, BindingResult result) {
+        if(result.hasErrors()) {
+            return "error";
+        }
+        return "success";
+    }
+
+    //组合验证注解
+    @RequestMapping("/save8")
+    public String save7(@ModelAttribute("user") @Valid User7 user, BindingResult result) {
+        if(result.hasErrors()) {
+            return "error";
+        }
         return "success";
     }
 
@@ -113,25 +205,6 @@ public class UserController {
     public String register(@Valid User user, BindingResult result) {
         if(result.hasErrors()) {
             return "error";
-        }
-        return "success";
-    }
-
-
-    @Autowired
-    private UserService userService;
-
-
-    @RequestMapping("/changePassword")
-    public String changePassword(
-            @RequestParam("password") String password,
-            @RequestParam("confirmation") String confirmation, Model model) {
-        try {
-            userService.changePassword(password, confirmation);
-        } catch (ConstraintViolationException e) {
-            for(ConstraintViolation violation : e.getConstraintViolations()) {
-                System.out.println(violation.getMessage());
-            }
         }
         return "success";
     }
