@@ -44,7 +44,53 @@
 
     </dependencies>
 
+    <build>
+        <finalName>spring4</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <reload>manual</reload>
+                    <!--<scanIntervalSeconds>2</scanIntervalSeconds>-->
+                    <stopPort>9999</stopPort>
+                    <webAppConfig>
+                        <contextPath>/${project.build.finalName}</contextPath>
+                    </webAppConfig>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>9080</port>
+                            <!--<maxIdleTime>60000</maxIdleTime>-->
+                        </connector>
+                    </connectors>
+                    <!-- spring profile  -->
+                    <systemProperties>
+                        <systemProperty>
+                            <name>spring.profiles.active</name>
+                            <value>development</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <jetty.version>8.1.8.v20121106</jetty.version>
+    </properties>
+
     <repositories>
+        <repository>
+            <id>public-jboss</id>
+            <name>JBoss Public Releases</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+        </repository>
+        <repository>
+            <id>public-typesafe</id>
+            <name>typesafe Public Releases</name>
+            <url>http://repo.typesafe.com/typesafe/releases/</url>
+        </repository>
         <repository>
             <id>thirdparty-releases</id>
             <name>JBoss Thirdparty Releases</name>

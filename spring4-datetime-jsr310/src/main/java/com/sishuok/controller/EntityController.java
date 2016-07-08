@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Administrator on 13-12-20.
  */
@@ -14,8 +16,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 public class EntityController {
 
     @RequestMapping("/test")
-    public String test(@ModelAttribute("entity") Entity entity) {
-        RequestContextUtils.getTimeZone(request)
+    public String test(@ModelAttribute("entity") Entity entity, HttpServletRequest request) {
+        RequestContextUtils.getTimeZone(request); //TODO error return null
         System.out.println(LocaleContextHolder.getTimeZone());
         return "test";
     }
