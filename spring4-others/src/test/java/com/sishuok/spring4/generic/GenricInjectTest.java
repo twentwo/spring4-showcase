@@ -91,7 +91,7 @@ public class GenricInjectTest {
         System.out.println(resolvableType7.isArray());
         System.out.println(resolvableType7.getComponentType().getGeneric(0).resolve());
 
-        //自定义一个泛型数组 List<String>[]
+        //自定义一个泛型数组 List<String>[]  TODO error 实际得到List<?>[] 输出null
         ResolvableType resolvableType8 = ResolvableType.forClassWithGenerics(List.class, String.class);
         ResolvableType resolvableType9 = ResolvableType.forArrayComponent(resolvableType8);
         System.out.println(resolvableType9.getComponentType().getGeneric(0).resolve());
